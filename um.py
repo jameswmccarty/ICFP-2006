@@ -12,8 +12,7 @@ regs = {
 	4 : 0,
 	5 : 0,
 	6 : 0,
-	7 : 0,
-	8 : 0}
+	7 : 0}
 
 mem = dict()
 
@@ -107,6 +106,9 @@ bit number.
 """
 def div(a, b, c):
 	global regs
+	if regs[c] == 0:
+		print("Caught DIV by Zero.")
+		exit()
 	regs[a] = (regs[b]//regs[c]) & 0xFFFFFFFF
 
 """
@@ -145,6 +147,9 @@ def alloc(a, b, c):
 	# Locate lowest available open address
 	# Or one position higher than current highest address
 	addr = min(set(x for x in range(max(mem.keys())+2)).difference(set(mem.keys())))
+	if addr > 0xFFFFFFFF:
+		print("Out of Memory condition.")
+		exit()
 	mem[addr] = [ 0 for x in range(regs[c]) ]
 	regs[b] = addr
 
@@ -281,4 +286,7 @@ if __name__ == "__main__":
 			print("Invalid OPCODE.")
 			exit()
 		ip += 1
-		ip %= len(mem[0])
+		if ip >= len(mem[0]):
+			print("Illegal Instruction Address.")
+			exit()
+			
