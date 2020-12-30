@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import copy
+
 ip = 0
 
 """eight registers"""
@@ -15,6 +17,7 @@ regs = {
 	7 : 0}
 
 mem = dict()
+used_addrs = {0}
 
 stdin_buff = ''
 
@@ -146,11 +149,13 @@ def alloc(a, b, c):
 	global mem
 	# Locate lowest available open address
 	# Or one position higher than current highest address
-	addr = min(set(x for x in range(max(mem.keys())+2)).difference(set(mem.keys())))
+	addr = min(set(x for x in range(max(used_addrs)+2)).difference(used_addrs))
+	used_addrs.add(addr)
 	if addr > 0xFFFFFFFF:
 		print("Out of Memory condition.")
 		exit()
 	mem[addr] = [ 0 for x in range(regs[c]) ]
+	#print("Allocated", regs[c], "bytes at ", addr)
 	regs[b] = addr
 
 """
@@ -161,7 +166,10 @@ Future allocations may then reuse that identifier.
 """
 def free(a, b, c):
 	global mem
-	mem.pop(regs[c])
+	#mem.pop(regs[c])
+	used_addrs.remove(regs[c])
+	#print("Free'd ", regs[c], len(used_addrs), " spaces in use.")
+	del mem[regs[c]]
 
 """
 #10. Output.
@@ -213,7 +221,9 @@ def load(a, b, c):
 	global regs
 	global mem
 	global ip
-	mem[0] = [ x for x in mem[regs[b]] ]
+	#print("Loading ",regs[b], "to address 0.  Offset", regs[c])
+	if regs[b] != 0:
+		mem[0] = copy.deepcopy(mem[regs[b]])
 	ip = regs[c]-1
 
 """
