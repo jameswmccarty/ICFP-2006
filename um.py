@@ -165,6 +165,7 @@ The array identified by the register C is abandoned.
 Future allocations may then reuse that identifier.
 """
 def free(a, b, c):
+	global regs
 	global mem
 	#mem.pop(regs[c])
 	used_addrs.remove(regs[c])
@@ -261,12 +262,9 @@ def load_im(a, value):
 	regs[a] = value
 
 def read_regs(word):
-	c_mask = 0x7
-	b_mask = 0x7 << 3
-	a_mask = 0x7 << 6
-	c = word & c_mask
-	b = (word & b_mask) >> 3
-	a = (word & a_mask) >> 6
+	c = word & 0x7
+	b = (word & (0x7 << 3)) >> 3
+	a = (word & (0x7 << 6)) >> 6
 	return (a, b, c)
 
 if __name__ == "__main__":
@@ -286,12 +284,16 @@ if __name__ == "__main__":
 	while True:
 		func = ops[(mem[0][ip] & (0xF << 28)) >> 28]
 		if func != load_im:
-			a, b, c = read_regs(mem[0][ip])
+			word = mem[0][ip]
+			c = word & 0x7
+			b = (word & (0x7 << 3)) >> 3
+			a = (word & (0x7 << 6)) >> 6
 			func(a, b, c)
 		elif func == load_im:
 			value = mem[0][ip] & 0x1FFFFFF
 			reg   = (mem[0][ip] & (0x7 << 25)) >> 25
-			func(reg, value)
+			regs[reg] = value
+			#func(reg, value)
 		else:
 			print("Invalid OPCODE.")
 			exit()
@@ -299,4 +301,3 @@ if __name__ == "__main__":
 		if ip >= len(mem[0]):
 			print("Illegal Instruction Address.")
 			exit()
-			
