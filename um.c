@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 	unsigned int *t; /* holds calloc'd pointer */
 
 	/* read input file into the mem buffer */
-	infile = fopen("codex.umz","rb");
+	infile = fopen("dump.umz","rb");
 	if(!infile) {
 		printf("Unable to open file!\n");
 		return 1;
@@ -161,13 +161,13 @@ int main(int argc, char **argv) {
 					for(in_ctr=0; in_ctr<BUFFMAX; in_ctr++) {
 						stdinbuff[in_ctr] = (unsigned char) 0xFF;
 					}
-					putc('>', stdout);
+					/*putc('>', stdout);*/
 					if(fgets(stdinbuff, BUFFMAX-1, stdin)==NULL)
 						return -1;
 				}
 				regs[c] = (unsigned int) stdinbuff[in_idx];
 				in_idx++;
-				if(in_idx == BUFFMAX-1 || (in_idx > 0 && stdinbuff[in_idx-1] == 0xFF))
+				if(in_idx == BUFFMAX-1 || (in_idx > 0 && stdinbuff[in_idx-1] == 0xFF) || (in_idx > 1 && stdinbuff[in_idx-1] == '\n'))
 					in_idx = 0;
 				break;
 			case 12: /* Load Program */
