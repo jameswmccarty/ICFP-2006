@@ -1,0 +1,111 @@
+README for Adventure
+
+Adventure is a program I wrote for my amusement, but I thought others
+might enjoy it as well.
+
+The adventure takes place in the year 19200 in a city called
+"Chicago."  I admit it's a bit far-fetched at times -- computers small
+enough to be mounted on mobile vehicles, a city so large its residents
+have resorted to numbering their streets -- but hopefully my
+fantastical story won't obscure the puzzle at the heart of it; I think
+it has a nice logic to it.
+
+Have fun!  My high score is 810.
+
+-- Howard Curry
+
+Room With a Door
+
+You are in a room with a mechanical door. You will probably need
+to use a keypad to unlock it. A hallway leads north. 
+There is a pamphlet here. 
+Underneath the pamphlet, there is a manifesto. 
+
+>: look pamphlet
+The pamphlet is standard municipal fare. It reads, The City of
+Chicago's Refuse and Recycling Program combines modern trash
+classification with cybernetic labor to keep our city beautiful,
+while at the same time minimizing waste and limiting consumer
+spending. In keeping with our motto of "One Resident's Trash Is
+Another Resident's Treasure," unwanted items are collected,
+repaired, and redistributed to other residents who would have
+purchased them anyway. Residents should contribute to the city's
+program by leaving heaps of items unwanted on the sidewalk on
+collection day. 
+Also, it is in pristine condition. 
+
+>: look manifesto
+The manifesto is [______REDACTED______]. 
+Also, it is in pristine condition. 
+
+Junk Room
+
+You are in a room with a pile of junk. A hallway leads south. 
+There is a bolt here. 
+Underneath the bolt, there is a spring. [incinerate]
+Underneath the spring, there is a button. [number 6]
+Underneath the button, there is a (broken) processor. [needs cache]
+Underneath the processor, there is a red pill. [incinerate]
+Underneath the pill, there is a (broken) radio. [needs transistor]
+Underneath the radio, there is a cache. [combine with processor]
+Underneath the cache, there is a blue transistor. [combine with radio]
+Underneath the transistor, there is an antenna. [do not combine with radio]
+Underneath the antenna, there is a screw. 
+Underneath the screw, there is a (broken) motherboard. [combine with screw and A-1920-IXB]
+Underneath the motherboard, there is a (broken) A-1920-IXB. [combine with radio, processor, bolt, red transistor]
+Underneath the A-1920-IXB, there is a red transistor. [combine with A-1920-IXB]
+Underneath the transistor, there is a (broken) keypad. [combine with button, motherboard]
+Underneath the keypad, there is some trash.
+
+54th Street and Ridgewood Court
+
+You are standing at the corner of 54th Street and Ridgewood
+Court. From here, you can go east. 
+There is a /etc/passwd here. [contains Yang's password]
+Underneath the /etc/passwd, there is a self-addressed note. 
+
+The note is written in a familiar hand. 
+It reads: Dear Self, I had to erase our memory to protect the
+truth. The Municipality has become more powerful than we had
+feared. Its Censory Engine has impeded the spread of information
+throughout our ranks. I've left two useful items for you here,
+but I had to disassemble them and scatter the pieces. Each piece
+may be assembled from the items at a single location. Repair the
+items and recover the blueprint from the Museum of Science and
+Industry; it will show you how to proceed. If you have trouble
+reading the blueprint, know that the Censory Engine blocks only
+your perception, not your actions. Have courage, my self, the
+abstraction is weak! P.S. SWITCH your GOGGLES!. Interestingly,
+this one is self-addressed. 
+
+Underneath the note, there is a (broken) downloader. [USB cable, display, jumper shunt, progress bar, power cord]
+Underneath the downloader, there is a (broken) uploader. [MOSFET, status LED, RS232 adapter, EPROM burner, battery]
+
+54th Street and Dorchester Avenue
+
+You are standing at the corner of 54th Street and Dorchester
+Avenue. From here, you can go north, east, south, or west. 
+There is an orange-red X-9247-GWE here. 
+Underneath the X-9247-GWE, there is a (broken) magenta
+V-0010-XBD. 
+Underneath the V-0010-XBD, there is a pumpkin F-1403-QDS. 
+Underneath the F-1403-QDS, there is a (broken) heavy P-5065-WQO.
+
+Underneath the P-5065-WQO, there is a taupe B-4832-LAL. 
+Underneath the B-4832-LAL, there is a (broken) gray40
+L-6458-RNH. 
+Underneath the L-6458-RNH, there is a (broken) eggplant
+T-9887-OFC. 
+Underneath the T-9887-OFC, there is a (broken) indigo
+Z-1623-CEK. 
+Underneath the Z-1623-CEK, there is a yellow-green H-9887-MKY. 
+Underneath the H-9887-MKY, there is a (broken) shiny F-6678-DOX.
+
+Underneath the F-6678-DOX, there is a pale-green R-1403-SXU. 
+Underneath the R-1403-SXU, there is a (broken) USB cable. 
+Underneath the USB cable, there is a sienna N-4832-NUN. 
+Underneath the N-4832-NUN, there is a slate-gray J-9247-IRG. 
+Underneath the J-9247-IRG, there is a dim-gray B-5065-YLQ.
+
+
+
