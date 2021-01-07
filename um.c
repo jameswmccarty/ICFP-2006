@@ -165,9 +165,11 @@ int main(int argc, char **argv) {
 					if(fgets(stdinbuff, BUFFMAX-1, stdin)==NULL)
 						return -1;
 				}
-				regs[c] = (unsigned int) stdinbuff[in_idx];
+				if(!(in_idx == 0 && stdinbuff[in_idx] == 0xFF)) {
+					regs[c] = (unsigned int) stdinbuff[in_idx];
+				}
 				in_idx++;
-				if(in_idx == BUFFMAX-1 || (in_idx > 0 && stdinbuff[in_idx-1] == 0xFF) || (in_idx > 1 && stdinbuff[in_idx-1] == '\n'))
+				if(in_idx == BUFFMAX-1 || (in_idx > 0 && stdinbuff[in_idx-1] == 0xFF) || (in_idx >= 1 && stdinbuff[in_idx-1] == '\n'))
 					in_idx = 0;
 				break;
 			case 12: /* Load Program */
