@@ -1,7 +1,7 @@
 #Makefile for Universal Machine
 
 CC = gcc
-CFLAGS = -ansi -pedantic -Werror -Wall -O2
+CFLAGS = -ansi -pedantic -Werror -Wall -O3
 LFLAGS = 
 
 all: um

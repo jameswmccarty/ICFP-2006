@@ -4,7 +4,7 @@
 #include <malloc.h>
 
 #define BUFFMAX 2048
-#define ADDRBUFFER 2000
+#define ADDRBUFFER 4000
 
 unsigned int ip = 0;
 unsigned int regs[8] = {0};
@@ -59,8 +59,13 @@ int main(int argc, char **argv) {
 	unsigned int a, b, c; /* register values */
 	unsigned int *t; /* holds calloc'd pointer */
 
+	if(argc != 2) {
+		printf("Usage: %s <program.umz>\n", argv[0]);
+		return 0;
+	}
+
 	/* read input file into the mem buffer */
-	infile = fopen("dump.umz","rb");
+	infile = fopen(argv[1],"rb");
 	if(!infile) {
 		printf("Unable to open file!\n");
 		return 1;
@@ -100,9 +105,9 @@ int main(int argc, char **argv) {
 	while(1) {
 		/* prep register values for the cycle */
 		c = addrmap[0][ip] & 0x7;
-		b = (addrmap[0][ip] & (0x7 << 3)) >> 3;
-		a = (addrmap[0][ip] & (0x7 << 6)) >> 6;
-		switch((addrmap[0][ip] & (0xF << 28)) >> 28) { /* read OPCODE */
+		b = (addrmap[0][ip] >> 3) & 0x7;
+		a = (addrmap[0][ip] >> 6) & 0x7;
+		switch((addrmap[0][ip] >> 28) & 0xF) { /* read OPCODE */
 			case 0: /* Conditional Move */
 				if(regs[c] != 0) {
 					regs[a] = regs[b];
@@ -191,7 +196,7 @@ int main(int argc, char **argv) {
 				ip = regs[c] - 1;
 				break;
 			case 13: /* Orthography */
-				regs[((addrmap[0][ip] & (0x7 << 25)) >> 25)] = (addrmap[0][ip] & 0x1FFFFFF);
+				regs[(addrmap[0][ip] >> 25) & 0x7] = (addrmap[0][ip] & 0x1FFFFFF);
 				break;
 			default:
 				return 1;
