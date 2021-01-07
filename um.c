@@ -16,15 +16,27 @@ unsigned int  *sizemap;
 unsigned int start_size = ADDRBUFFER;
 
 unsigned int insert_addr(unsigned int *input, unsigned int size) {
+	unsigned static int bookmark = 0;
 	unsigned int i, t;
-	for(i=0; i<start_size; i++) {
-		if(addrmap[i] == NULL) {
-			addrmap[i] = input;
-			sizemap[i] = size;
+	for(;bookmark<start_size; bookmark++) {
+		if(addrmap[bookmark] == NULL) {
+			addrmap[bookmark] = input;
+			sizemap[bookmark] = size;
+			i = bookmark;
 			return i;
 		}
 	}
 	/* overran buffer size */
+	for(i=0;i<start_size;i++) {
+		if(addrmap[i] == NULL) {
+			addrmap[i] = input;
+			sizemap[i] = size;
+			bookmark = i;
+			return i;
+		}
+	}
+	/* all other addresses exhausted */
+
 	start_size *= 2;
 	t = i;
 	addrmap = (unsigned int **) realloc(addrmap, start_size*sizeof(unsigned int *));
@@ -41,6 +53,7 @@ unsigned int insert_addr(unsigned int *input, unsigned int size) {
 		addrmap[i] = NULL;
 		sizemap[i] = 0;
 	}
+	bookmark = t+1;
 	return t;
 }
 
