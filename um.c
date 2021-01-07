@@ -3,7 +3,7 @@
 #include <string.h>
 #include <malloc.h>
 
-#define BUFFMAX 45
+#define BUFFMAX 2048
 #define ADDRBUFFER 2000
 
 unsigned int ip = 0;

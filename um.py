@@ -301,3 +301,4 @@ if __name__ == "__main__":
 		if ip >= len(mem[0]):
 			print("Illegal Instruction Address.")
 			exit()
+

@@ -1,1 +1,32 @@
+To decrypt the codex.umz:
+
 (\b.bb)(\v.vv)06FHPVboundvarHRAk
+
+Account listings:
+
+ftd
+knr
+guest
+gardener
+ohmega
+yang
+howie
+hmonk
+bbarker
+
+Found passwords:
+user: howie
+password: xyzzy
+
+user: ohmega
+password: bidirectional
+
+user: ftd
+password: falderal90
+
+Found codes:
+INTRO.LOG=200@999999|35e6f52e9bc951917c73af391e35e1d
+INTRO.UMD=10@999999|7005f80d6cd9b7b837802f1e58b11b8
+PUZZL.TSK=100@1001|14370747643c6d2db0a40ecb4b0bb65
+INTRO.MUA=5@999999|b9666432feff66e528a17fb69ae8e9a
+INTRO.QBC=10@999999|e6ee9c98b80b4dd04814a29a37bcba8
