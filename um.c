@@ -67,7 +67,7 @@ unsigned int byteswap(unsigned int b) {
 int main(int argc, char **argv) {
 
 	FILE *infile;
-	int in_idx = 0; /* index input buffer */
+	unsigned int in_idx = 0; /* index input buffer */
 	unsigned int a, b, c; /* register values */
 	unsigned int *t; /* holds calloc'd pointer */
 
