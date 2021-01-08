@@ -68,7 +68,6 @@ int main(int argc, char **argv) {
 
 	FILE *infile;
 	int in_idx = 0; /* index input buffer */
-	int in_ctr = 0;
 	unsigned int a, b, c; /* register values */
 	unsigned int *t; /* holds calloc'd pointer */
 
@@ -112,6 +111,8 @@ int main(int argc, char **argv) {
 		}
 		addrmap[0][in_idx++] = byteswap(b);
 	}
+	/* done reading inputs */
+	fclose(infile);
 	in_idx = 0;
 	ip = 0;
 
@@ -176,10 +177,7 @@ int main(int argc, char **argv) {
 				break;
 			case 11: /* Input */
 				if(in_idx == 0 || stdinbuff[in_idx] == 0xFF) {
-					for(in_ctr=0; in_ctr<BUFFMAX; in_ctr++) {
-						stdinbuff[in_ctr] = (unsigned char) 0xFF;
-					}
-					/*putc('>', stdout);*/
+					memset(stdinbuff, 0xFF, BUFFMAX);
 					if(fgets(stdinbuff, BUFFMAX-1, stdin)==NULL)
 						return -1;
 				}
@@ -195,7 +193,6 @@ int main(int argc, char **argv) {
 					free(addrmap[0]);
 					sizemap[0] = sizemap[regs[b]];
 					addrmap[0] = (unsigned int *) malloc(sizemap[0]);
-					/* mem = (unsigned long int *) realloc(mem, size); */
 					if(addrmap[0] == NULL) {
 						printf("Realloc failed.\n");
 						return -1;
