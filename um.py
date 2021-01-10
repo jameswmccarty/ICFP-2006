@@ -17,9 +17,23 @@ regs = {
 	7 : 0}
 
 mem = dict()
-used_addrs = {0}
 
 stdin_buff = ''
+
+def next_addr():
+	start_size = 8000
+	avail = set(_ for _ in range(start_size))
+	avail.discard(0)
+	while True:
+		if len(avail) > 0:
+			yield avail.pop()
+		else:
+			avail = set(_ for _ in range(start_size)).difference(set(mem.keys()))
+			if len(avail) == 0:
+				avail = set(_ for _ in range(start_size, start_size*2))
+				start_size *= 2
+
+addr_gen = next_addr()
 
 """
   Standard Operators.
@@ -147,15 +161,9 @@ active allocated array, is placed in the B register.
 def alloc(a, b, c):
 	global regs
 	global mem
-	# Locate lowest available open address
-	# Or one position higher than current highest address
-	addr = min(set(x for x in range(max(used_addrs)+2)).difference(used_addrs))
-	used_addrs.add(addr)
-	if addr > 0xFFFFFFFF:
-		print("Out of Memory condition.")
-		exit()
-	mem[addr] = [ 0 for x in range(regs[c]) ]
-	#print("Allocated", regs[c], "bytes at ", addr)
+	global addr_gen
+	addr = next(addr_gen)
+	mem[addr] = [0 for _ in range(regs[c])]
 	regs[b] = addr
 
 """
@@ -168,7 +176,6 @@ def free(a, b, c):
 	global regs
 	global mem
 	#mem.pop(regs[c])
-	used_addrs.remove(regs[c])
 	#print("Free'd ", regs[c], len(used_addrs), " spaces in use.")
 	del mem[regs[c]]
 

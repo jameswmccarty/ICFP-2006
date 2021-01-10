@@ -190,9 +190,8 @@ int main(int argc, char **argv) {
 				break;
 			case 12: /* Load Program */
 				if(regs[b] != 0) {
-					free(addrmap[0]);
 					sizemap[0] = sizemap[regs[b]];
-					addrmap[0] = (unsigned int *) malloc(sizemap[0]);
+					addrmap[0] = (unsigned int *) realloc(addrmap[0], sizemap[0]);
 					if(addrmap[0] == NULL) {
 						printf("Realloc failed.\n");
 						return -1;

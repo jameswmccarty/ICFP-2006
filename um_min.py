@@ -2,14 +2,26 @@
 
 import copy
 
+mem = dict()
+
+def next_addr():
+	start_size = 8000
+	avail = set(_ for _ in range(start_size))
+	avail.discard(0)
+	while True:
+		if len(avail) > 0:
+			yield avail.pop()
+		else:
+			avail = set(_ for _ in range(start_size)).difference(set(mem.keys()))
+			if len(avail) == 0:
+				avail = set(_ for _ in range(start_size, start_size*2))
+				start_size *= 2
 
 if __name__ == "__main__":
 
 	"""eight registers"""
 	"""32-bits each"""
 	regs = [0,0,0,0,0,0,0,0]
-	mem = dict()
-	used_addrs = {0}
 	stdin_buff = ''
 	ip = 0
 
@@ -21,6 +33,8 @@ if __name__ == "__main__":
 	while(len(raw_data) > 0):
 		mem[0].append(int.from_bytes(raw_data[0:4], byteorder='big'))
 		raw_data = raw_data[4:]
+
+	addr_gen = next_addr()
 
 	while True:
 		word = mem[0][ip]
@@ -46,15 +60,10 @@ if __name__ == "__main__":
 		elif func == 7:
 			exit()
 		elif func == 8:
-			addr = min(set(_ for _ in range(max(used_addrs)+2)).difference(used_addrs))
-			used_addrs.add(addr)
-			if addr > 0xFFFFFFFF:
-				print("Out of Memory condition.")
-				exit()
-			mem[addr] = [0]*regs[c]
+			addr = next(addr_gen)
+			mem[addr] = [0 for _ in range(regs[c])]
 			regs[b] = addr
 		elif func == 9:
-			used_addrs.remove(regs[c])
 			del mem[regs[c]]
 		elif func == 10:
 			print(chr(regs[c]), end='')
