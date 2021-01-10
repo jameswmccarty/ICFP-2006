@@ -25,14 +25,14 @@ if __name__ == "__main__":
 	stdin_buff = ''
 	ip = 0
 
-	with open("sandmark.umz", 'rb') as infile:
+	with open("dump.umz", 'rb') as infile:
 		raw_data = infile.read()
 
 	mem[0] = []
-
-	while(len(raw_data) > 0):
-		mem[0].append(int.from_bytes(raw_data[0:4], byteorder='big'))
-		raw_data = raw_data[4:]
+	read_idx = 0
+	while(read_idx < len(raw_data)):
+		mem[0].append(int.from_bytes(raw_data[read_idx:read_idx+4], byteorder='big'))
+		read_idx += 4
 
 	addr_gen = next_addr()
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 		elif func == 11:
 			while len(stdin_buff) == 0:
 				stdin_buff = input()
-				stdin_buff += chr(0xFF)
+				stdin_buff += chr(10)
 			regs[c] = ord(stdin_buff[0])
 			stdin_buff = stdin_buff[1:]
 		elif func == 12:

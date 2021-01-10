@@ -281,9 +281,10 @@ if __name__ == "__main__":
 
 	mem[0] = []
 
-	while(len(raw_data) > 0):
-		mem[0].append(int.from_bytes(raw_data[0:4], byteorder='big'))
-		raw_data = raw_data[4:]
+	read_idx = 0
+	while(read_idx < len(raw_data)):
+		mem[0].append(int.from_bytes(raw_data[read_idx:read_idx+4], byteorder='big'))
+		read_idx += 4
 
 
 	ops = [cond_mv, array_idx, array_write, add, mult, div, nand, halt, alloc, free, out, inpt, load, load_im]
