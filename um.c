@@ -176,16 +176,16 @@ int main(int argc, char **argv) {
 				printf("%c", (char) regs[c]);
 				break;
 			case 11: /* Input */
-				if(in_idx == 0 || stdinbuff[in_idx] == 0xFF) {
+				if(in_idx == 0 || stdinbuff[in_idx] == (char) 0xFF) {
 					memset(stdinbuff, 0xFF, BUFFMAX);
 					if(fgets(stdinbuff, BUFFMAX-1, stdin)==NULL)
 						return -1;
 				}
-				if(!(in_idx == 0 && stdinbuff[in_idx] == 0xFF)) {
+				if(!(in_idx == 0 && stdinbuff[in_idx] == (char) 0xFF)) {
 					regs[c] = (unsigned int) stdinbuff[in_idx];
 				}
 				in_idx++;
-				if(in_idx == BUFFMAX-1 || (in_idx > 0 && stdinbuff[in_idx-1] == 0xFF) || (in_idx >= 1 && stdinbuff[in_idx-1] == '\n'))
+				if(in_idx == BUFFMAX-1 || (in_idx > 0 && stdinbuff[in_idx-1] == (char) 0xFF) || (in_idx >= 1 && stdinbuff[in_idx-1] == '\n'))
 					in_idx = 0;
 				break;
 			case 12: /* Load Program */
