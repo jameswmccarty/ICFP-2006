@@ -204,8 +204,8 @@ def inpt(a, b, c):
 	global regs
 	global stdin_buff
 	while len(stdin_buff) == 0:
-		stdin_buff = input(">")
-		stdin_buff += chr(0xFF)
+		stdin_buff = input()
+		stdin_buff += chr(10)
 	regs[c] = ord(stdin_buff[0])
 	stdin_buff = stdin_buff[1:]
 
