@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import copy
+import sys
 
 ip = 0
 
@@ -276,7 +277,11 @@ def read_regs(word):
 
 if __name__ == "__main__":
 
-	with open("sandmark.umz", 'rb') as infile:
+	if len(sys.argv) != 2:
+		print('python '+sys.argv[0]+' <filename.umz>')
+		exit()
+
+	with open(sys.argv[1], 'rb') as infile:
 		raw_data = infile.read()
 
 	mem[0] = []

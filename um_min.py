@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import copy
+import sys
 
 mem = dict()
 
@@ -25,7 +26,11 @@ if __name__ == "__main__":
 	stdin_buff = ''
 	ip = 0
 
-	with open("dump.umz", 'rb') as infile:
+	if len(sys.argv) != 2:
+		print('python '+sys.argv[0]+' <filename.umz>')
+		exit()
+
+	with open(sys.argv[1], 'rb') as infile:
 		raw_data = infile.read()
 
 	mem[0] = []
